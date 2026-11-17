@@ -1,0 +1,6 @@
+import {genres,defaults,validate,recommend} from './ranking.mjs';
+const key='soundmatch-public-v1';
+const get=async name=>{const r=await fetch('./'+name+'.json');if(!r.ok)throw Error('Unable to load catalog');return r.json();};
+const [tracks,evaluation]=await Promise.all([get('tracks'),get('evaluation')]);
+function read(){try{const s=JSON.parse(localStorage.getItem(key));if(s){validate(s.profile);if(Array.isArray(s.saved)&&Array.isArray(s.skipped))return s;}}catch{}return {profile:{...defaults},saved:[],skipped:[]};}
+export async function api(path,body){const s=read();if(path==='soundmatch/profile'){s.profile=validate(body);localStorage.setItem(key,JSON.stringify(s));return s.profile;}if(path==='soundmatch/feedback'){if(!tracks.some(t=>t.id===body.track_id)||!['save','skip','undo'].includes(body.action))throw Error('Unknown feedback');s.saved=s.saved.filter(x=>x!==body.track_id);s.skipped=s.skipped.filter(x=>x!==body.track_id);if(body.action==='save')s.saved.push(body.track_id);if(body.action==='skip')s.skipped.push(body.track_id);s.saved.sort();s.skipped.sort();localStorage.setItem(key,JSON.stringify(s));return s;}if(path!=='soundmatch')throw Error('Unknown request');return {...s,genres,evaluation,recommendations:recommend(tracks,s.profile,s.saved,s.skipped),saved_tracks:tracks.filter(t=>s.saved.includes(t.id))};}

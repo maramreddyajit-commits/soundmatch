@@ -1,0 +1,1 @@
+"""Offline Resume S portfolio."""

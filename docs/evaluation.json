@@ -1,0 +1,15 @@
+{
+  "users": 160,
+  "tracks": 480,
+  "k": 10,
+  "train_likes_per_user": 10,
+  "holdout_likes_per_user": 20,
+  "train_holdout_overlap": 0,
+  "precision_at_k": 0.4543750000000001,
+  "recall_at_k": 0.22718750000000004,
+  "catalog_coverage": 0.7416666666666667,
+  "genre_diversity": 0.523611111111111,
+  "popularity_baseline_precision_at_k": 0.053125,
+  "seed": 20261117,
+  "limitation": "Evaluation measures recovery of synthetic preferences built from similar metadata. It does not measure listening satisfaction. Random per-user interaction holdout, not a temporal live-user trial."
+}
