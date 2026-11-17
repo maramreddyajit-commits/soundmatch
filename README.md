@@ -31,3 +31,7 @@ The browser implements the same deterministic content ranking as the Python refe
 480 fictional tracks, 60 artists and 160 synthetic profiles. Ten train and twenty held-out likes per user. Precision@10 = 727/1600 = 45.4375%; coverage = 356/480 = 74.1667%. Random per-user interaction split, not temporal/unseen-user validation. Generator and recommender share metadata, so this is favorable synthetic consistency, not listener satisfaction.
 
 See product documentation for KPI definitions, prioritization assumptions and proposed experiments. Proposed research has not been conducted. Implementation was built with AI coding assistance; evidence and limitations are documented explicitly.
+
+## Publication verification — November 17, 2026
+
+10 Python tests passed. `node tests/browser-parity.mjs` passed 163 Python/browser ranking comparisons. Public browser checks passed preference updates, save/reload, skip/undo, mobile layout and isolation between visitors. No uncaught JavaScript errors were observed in these checks.
